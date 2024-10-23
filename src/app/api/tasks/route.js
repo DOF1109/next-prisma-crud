@@ -6,6 +6,13 @@ export const GET = async () => {
   return NextResponse.json(tasks);
 };
 
-export const POST = () => {
-  return NextResponse.json({ message: "Creating tasks" });
+export const POST = async (request) => {
+  const { title, description } = await request.json();
+  const newTask = await prisma.tasks.create({
+    data: {
+      title,
+      description,
+    },
+  });
+  return NextResponse.json(newTask);
 };
