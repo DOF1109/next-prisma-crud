@@ -1,6 +1,12 @@
 const NewPage = () => {
   return (
-    <div>Tasks form</div>
+    <div>
+      <form action="">
+        <input type="text" />
+        <textarea row="3"></textarea>
+        <button>Create</button>
+      </form>
+    </div>
   )
 }
 
