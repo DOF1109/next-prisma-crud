@@ -10,15 +10,31 @@ export const GET = async (request, { params }) => {
   return NextResponse.json(task);
 };
 
-export const PUT = (request, { params }) => {
-  return NextResponse.json("Updating task " + params.id);
+export const PUT = async (request, { params }) => {
+  const data = await request.json();
+
+  try {
+    const updatedTask = await prisma.tasks.update({
+      where: {
+        id: parseInt(params.id),
+      },
+      data: data, // this updates the task if data have title or description or both
+    });
+    return NextResponse.json(updatedTask);
+  } catch (error) {
+    return NextResponse.json(error.message);
+  }
 };
 
 export const DELETE = async (request, { params }) => {
-  const taskRemoved = await prisma.tasks.delete({
-    where: {
-      id: parseInt(params.id),
-    },
-  });
-  return NextResponse.json(taskRemoved);
+  try {
+    const taskRemoved = await prisma.tasks.delete({
+      where: {
+        id: parseInt(params.id),
+      },
+    });
+    return NextResponse.json(taskRemoved);
+  } catch (error) {
+    return NextResponse.json(error.message);
+  }
 };
