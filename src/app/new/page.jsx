@@ -1,7 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 const NewPage = () => {
-  
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -15,7 +18,7 @@ const NewPage = () => {
       body: JSON.stringify({ title, description }),
     }).then((resp) => resp.json);
 
-    console.log(res);
+    router.push("/");
   };
 
   return (
