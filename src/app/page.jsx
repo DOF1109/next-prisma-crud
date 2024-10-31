@@ -7,7 +7,7 @@ const HomePage = () => {
   const [tasks, setTasks] = useState([]);
 
   const loadTasks = async () => {
-    const res = await fetch("http://localhost:3000/api/tasks").then((resp) =>
+    const res = await fetch("/api/tasks").then((resp) =>
       resp.json()
     );
     setTasks(res);
