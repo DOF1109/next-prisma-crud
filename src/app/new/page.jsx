@@ -41,9 +41,18 @@ const NewPage = ({ params }) => {
       }).then((resp) => resp.json);
     }
 
-    // refresh the cache and redirect
-    router.refresh();
     router.push("/");
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure?")) {
+      const resp = await fetch(`/api/tasks/${params.id}`, {
+        method: "DELETE",
+      }).then((res) => res.json());
+      console.log(resp);
+
+      router.push("/");
+    }
   };
 
   return (
@@ -71,9 +80,21 @@ const NewPage = ({ params }) => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         ></textarea>
-        <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
+          type="submit"
+        >
           Submit
         </button>
+        {params.id && (
+          <button
+            className="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded ml-4"
+            type="button"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        )}
       </form>
     </div>
   );
