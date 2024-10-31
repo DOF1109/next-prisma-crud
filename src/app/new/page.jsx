@@ -56,7 +56,7 @@ const NewPage = ({ params }) => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-[calc(100vh-5rem)] flex justify-center items-center">
       <form className="bg-slate-800 p-10" onSubmit={handleSubmit}>
         <label htmlFor="title" className="font-bold text-sm">
           Title
