@@ -42,8 +42,8 @@ const NewPage = ({ params }) => {
     }
 
     // refresh the cache and redirect
-    await router.replace(router.push("/"));
-    // router.push("/");
+    router.refresh();
+    router.push("/");
   };
 
   return (

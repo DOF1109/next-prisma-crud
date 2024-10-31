@@ -1,14 +1,21 @@
+"use client";
+
 import TaskCard from "@/components/TaskCard";
+import { useEffect, useState } from "react";
 
-const loadTasks = async () => {
-  const res = await fetch("http://localhost:3000/api/tasks").then((resp) =>
-    resp.json()
-  );
-  return res;
-};
+const HomePage = () => {
+  const [tasks, setTasks] = useState([]);
 
-const HomePage = async () => {
-  const tasks = await loadTasks();
+  const loadTasks = async () => {
+    const res = await fetch("http://localhost:3000/api/tasks").then((resp) =>
+      resp.json()
+    );
+    setTasks(res);
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
   return (
     <section className="container mx-auto">
